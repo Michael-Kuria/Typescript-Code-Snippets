@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
         "target": "ES2018",
-        "outDir": "./dist",
+        "outDir": "./dist", //location of the compiled code
         "rootDir": "./src",
-        "module": "CommonJS"
+        "module": "CommonJS",
+        "noEmitOnError": true  //Javascript code will not be emitted by the compiler if there are errors.
     }
 }
