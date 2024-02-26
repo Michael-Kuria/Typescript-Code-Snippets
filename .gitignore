@@ -6,3 +6,7 @@
 ## Types ##
 /types/dist
 /types/node_modules
+
+## Classes ##
+/classes/dist
+/classes/node_modules
