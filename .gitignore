@@ -10,3 +10,8 @@
 ## Classes ##
 /classes/dist
 /classes/node_modules
+
+
+## webapp ##
+/webapp/dist
+/webapp/node_modules

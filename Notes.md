@@ -6,3 +6,9 @@
 - Create a file `tsconfig.json` to configure the terminal
 
 ### Running the application
+
+### Running webpack webapp
+
+- `npx webpack` - to create the bundle.js then run the application with `node dist/bundle.js`
+- Running the webpack-dev-server `npx webpack serve`
+-

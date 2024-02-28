@@ -1,21 +1,24 @@
-class Animal{
-    constructor(public name: string, public hasLegs: boolean, public legs: number = 0){}
+import { LocalDataSource } from "./data/LoadDataSource";
+import { DomDisplay } from "./DomDisplay";
+import "bootstrap/dist/css/bootstrap.css";
 
-    write(): void {
-        if(this.hasLegs){
-            console.log(`${this.name} can walk and has ${this.legs} legs`);
-        }else{
-            console.log(`${this.name} cannot walk`);
-        }
+let ds = new LocalDataSource();
+
+async function displayData(): Promise<HTMLElement>{
+    let display = new DomDisplay();
+    display.props ={
+        products: await ds.getProducts("name"),
+        order: ds.order
     }
+    return display.getContent();
 }
 
-
-let animals: Animal[] = [
-    new Animal("elephant", true, 4),
-    new Animal("snake", false),
-    new Animal("Chicken", true, 2)
-]
-
-
-animals.forEach(animal => animal.write());
+document.onreadystatechange = () => {
+    if(document.readyState === "complete"){
+        displayData().then(elem => {
+            let rootElement = document.getElementById("app");
+            rootElement.innerHTML = "";
+            rootElement.appendChild(elem);
+        })
+    }
+}
