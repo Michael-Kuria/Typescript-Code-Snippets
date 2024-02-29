@@ -1,14 +1,14 @@
 import { LocalDataSource } from "./data/LoadDataSource";
-import { DomDisplay } from "./DomDisplay";
+// import { DomDisplay } from "./DomDisplay";
+import { HTMLDisplay } from "./HTMLDisplay";
 import "bootstrap/dist/css/bootstrap.css";
 
 let ds = new LocalDataSource();
 
 async function displayData(): Promise<HTMLElement>{
-    let display = new DomDisplay();
+    let display = new HTMLDisplay();
     display.props ={
-        products: await ds.getProducts("name"),
-        order: ds.order
+        dataSource: ds
     }
     return display.getContent();
 }
