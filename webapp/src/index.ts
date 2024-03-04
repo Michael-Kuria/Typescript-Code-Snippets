@@ -1,9 +1,10 @@
-import { LocalDataSource } from "./data/LoadDataSource";
+//import { LocalDataSource } from "./data/LoadDataSource";
+import { RemoteDataSource } from "./data/remoteDataSource";
 // import { DomDisplay } from "./DomDisplay";
 import { HTMLDisplay } from "./HTMLDisplay";
 import "bootstrap/dist/css/bootstrap.css";
 
-let ds = new LocalDataSource();
+let ds = new RemoteDataSource();
 
 async function displayData(): Promise<HTMLElement>{
     let display = new HTMLDisplay();

@@ -1,4 +1,5 @@
 import {Product, Order} from "./Entities";
+import { minimumValue } from "../decorators";
 
 export type ProductProp = keyof Product;
 
@@ -15,6 +16,7 @@ export abstract class AbstractDataSource{
         this.loading = this.getData();
     }
 
+    @minimumValue("price", 30)
     async getProducts(sortProp: ProductProp = "id", category?: string): Promise<Product[]>{
         await this.loading;
         return this.selectProducts(this._products, sortProp, category);
@@ -31,7 +33,6 @@ export abstract class AbstractDataSource{
     }
 
     protected selectProducts(prods: Product[], sortProp: ProductProp, category?: string): Product[]{
-       
         return prods.filter(p => category === undefined || p.category === category)
         .sort((p1, p2) => p1[sortProp] < p2[sortProp] ? -1: p1[sortProp] > p2[sortProp]? 1: 0);
     }
