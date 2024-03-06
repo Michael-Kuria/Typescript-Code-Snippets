@@ -6,6 +6,7 @@
         "jsx": "react", // specifies how HTML elements in TSX files are processed
         "jsxFactory": "createElement", // specifies the name of the factory function that is used to replace HTML elements in TSX files
         "moduleResolution": "node", // for typescript to resolve the dependency on the axios package
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     }
 }
