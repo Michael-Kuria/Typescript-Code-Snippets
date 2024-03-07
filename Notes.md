@@ -12,3 +12,6 @@
 - `npx webpack` - to create the bundle.js then run the application with `node dist/bundle.js`
 - Running the webpack-dev-server `npx webpack serve`
 -
+
+### Creating a react app configured for use with typescript
+- `npx create-react-app `app name` --template typescript`

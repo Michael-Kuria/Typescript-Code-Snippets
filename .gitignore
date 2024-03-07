@@ -15,3 +15,7 @@
 ## webapp ##
 /webapp/dist
 /webapp/node_modules
+
+
+##reactapp ##
+/reactapp/node_modules
