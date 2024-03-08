@@ -1,40 +1,39 @@
-import React, { FunctionComponent, useState } from "react";
-import { Product, Order } from "./data/entities";
-import { ProductList } from "./productList";
+import React, { FunctionComponent, useEffect, useState } from "react";
+// import { Product, Order } from "./data/entities";
+// import { ProductList } from "./productList";
+import { dataStore } from "./data/dataStore";
+import { Provider } from "react-redux";
+import { HttpHandler } from "./data/httpHandler";
+import { addProduct } from "./data/actionCreators";
+import { ConnectedProductList } from "./data/productListConnector";
 
-let testData: Product[] = [1, 2, 3, 4, 5].map((num) => ({
-  id: num,
-  name: `Prod${num}`,
-  category: `Cat${num % 2}`,
-  description: `Product ${num}`,
-  price: 100,
-}));
+// let testData: Product[] = [1, 2, 3, 4, 5].map((num) => ({
+//   id: num,
+//   name: `Prod${num}`,
+//   category: `Cat${num % 2}`,
+//   description: `Product ${num}`,
+//   price: 100,
+// }));
 
 interface Props {}
 
 const App: FunctionComponent<Props> = () => {
-  const [order, setOrder] = useState(new Order());
-
-  const getCategories = (): string[] => {
-    return [...new Set(testData.map((p) => p.category))];
-  };
-
-  const addToOrder = (product: Product, quantity: number) => {
-    setOrder((prevOrder) => {
-      const updatedOrder = new Order(prevOrder.orderLines);
-      updatedOrder.addProduct(product, quantity);
-      return updatedOrder;
+  const httpHandler = new HttpHandler();
+  useEffect(() => {
+    httpHandler.loadProducts((data) => {
+      dataStore.dispatch(addProduct(...data));
     });
+  }, []);
+
+  const submitCallback = () => {
+    console.log("Submit order");
   };
 
   return (
     <div className="App">
-      <ProductList
-        products={testData}
-        categories={getCategories()}
-        order={order}
-        addToOrder={addToOrder}
-      />
+      <Provider store={dataStore}>
+        <ConnectedProductList />
+      </Provider>
     </div>
   );
 };
